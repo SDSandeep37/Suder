@@ -1,7 +1,11 @@
 import { SignUp } from '@clerk/nextjs'
 
 const Page = () => {
-  return <SignUp/>
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <SignUp fallbackRedirectUrl="/dashboard"/>
+    </div>
+  )
 }
 
 export default Page
