@@ -1,0 +1,30 @@
+.profileName{
+  text-align: center;
+}
+.profileDetails{
+  gap: 40px;
+}
+.profileLeft{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: var(--foreground);
+  border-radius: 44%;
+  box-shadow: 10px 10px 10px var(--dark-blue);
+  align-self: flex-start;
+}
+
+.profileRight{
+  background-color: var(--background);
+}
+.buttonContainer button{
+  background-color: var(--bright-yellow);
+  color: var(--primary);
+  font-style: italic;
+  cursor: pointer;
+}
+.buttonContainer button:hover{
+  background-color: var(--primary);
+  color: var(--bright-yellow);
+}

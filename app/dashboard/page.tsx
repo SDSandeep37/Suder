@@ -1,4 +1,5 @@
 "use client"
+import Navbar from '@/components/Navbar/Navbar';
 import { RedirectToSignIn, SignedIn, SignedOut, useUser } from '@clerk/nextjs';
 
 const Dashboard = () => {
@@ -6,6 +7,8 @@ const Dashboard = () => {
   return (
      <>
       <SignedIn>
+        
+        <Navbar />
         <div className="p-6">
           <h1 className="text-2xl font-bold">
             Welcome, <span>{useUser().user?.firstName}</span>!
