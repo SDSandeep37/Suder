@@ -6,12 +6,8 @@
 }
 .profileLeft{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  background-color: var(--foreground);
+  
   border-radius: 44%;
-  box-shadow: 10px 10px 10px var(--dark-blue);
   align-self: flex-start;
 }
 
@@ -25,6 +21,20 @@
   cursor: pointer;
 }
 .buttonContainer button:hover{
+  background-color: var(--primary);
+  color: var(--bright-yellow);
+}
+.profileChangeButton{
+  background-color: var(--bright-yellow);
+  color: var(--primary);
+  font-style: italic;
+  cursor: pointer;
+  padding : 10px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-self: flex-end;
+}
+.profileChangeButton:hover{
   background-color: var(--primary);
   color: var(--bright-yellow);
 }

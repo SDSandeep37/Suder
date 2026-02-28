@@ -3,11 +3,10 @@
   height: 60px;
   box-shadow: 0 2px 4px var(--foreground);
 }
-.navbar .navbarLogo{
-  background-color: var(--foreground);
-  width: 60px;
+.navbar .logo{
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
+  font-weight: bolder;
 }
 .navbarRight{
   display: flex;

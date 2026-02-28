@@ -1,0 +1,38 @@
+.globalNavbar {
+  background-color: var(--foreground);
+  color: var(--primary);
+  height: 60px;
+  
+}
+.globalNavbar .login{
+  color: red;
+  border: var(--background) solid 1px;
+  padding: 5px 10px;
+  transition: var(--transition);
+}
+.globalNavbar .login:hover{
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.globalNavbar .signUp{
+  color:green;
+  border: var(--background) solid 1px;
+  padding: 5px 10px;
+  transition: var(--transition);
+  margin-right: 5px;
+}
+.globalNavbar .signUp:hover{
+  background-color: var(--background);
+  color: var(--foreground);
+}
+.globalNavbar .dashboard{
+  color: var(--primary);
+  border: var(--background) solid 1px;
+  padding: 5px 10px;
+  transition: var(--transition);
+}
+.globalNavbar .dashboard:hover{
+  background-color: var(--background);
+  color: var(--foreground);
+}

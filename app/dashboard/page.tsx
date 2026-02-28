@@ -1,24 +1,15 @@
 "use client"
-import Navbar from '@/components/Navbar/Navbar';
-import { RedirectToSignIn, SignedIn, SignedOut, useUser } from '@clerk/nextjs';
+import { useUserContext } from '@/Context';
 
 const Dashboard = () => {
-  const {user} = useUser();
+  const { userData } = useUserContext();
+  const firstName = userData?.first_name || "Guest";
   return (
-     <>
-      <SignedIn>
-        
-        <Navbar />
-        <div className="p-6">
+      <main className="p-6">
           <h1 className="text-2xl font-bold">
-            Welcome, <span>{useUser().user?.firstName}</span>!
+            Welcome, <span>{firstName}</span>!
           </h1>
-        </div>
-      </SignedIn>
-      <SignedOut>
-        <RedirectToSignIn />
-      </SignedOut>
-    </>
+        </main>
 
 
   )
