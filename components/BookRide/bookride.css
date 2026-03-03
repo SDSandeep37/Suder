@@ -1,0 +1,96 @@
+.mainContainer{
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+.bookrideContainer{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--foreground);
+  color:var(--background);
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+.bookrideContainer h1{
+  color: var(--dark-blue);
+  font-weight: 600;
+  text-decoration:solid underline;
+}
+.bookrideContainer form{
+  background-color: var(--background);
+  height: 80%;
+  width: 90%;
+  border-radius: 20px;
+  color: var(--foreground);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.bookrideContainer form div{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.bookrideContainer form div input{
+  border: 1px solid;
+  padding: 10px;
+  /* border-top-right-radius: 20px; */
+}
+.bookrideContainer form div button{
+  background-color: darkcyan;
+  padding: 10px 20px;
+  font-size: 13px;
+  transition: var(--transition);
+  border: 1px solid var(--background);
+  font-weight: bold;
+
+}
+.bookrideContainer form div button:hover{
+  border-radius: 4px;
+  background-color: unset;
+  border: 1px solid var(--foreground);
+  color:darkcyan;
+}
+.mapSearchButton{
+  position: absolute;
+  padding: unset !important;
+  background:transparent !important;
+  right: 0px;
+  top: 50%;
+  border:none !important;
+  font-size: 20px !important;
+  cursor: pointer;
+}
+.mapContainer{
+  flex:3;
+  border:2px solid var(--foreground);
+  box-shadow: 3px 4px 40px var(--primary);
+
+}
+small{
+  font-size: 9px;
+}
+@media only screen and (max-width:1076px){
+  .mainContainer{
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .bookrideContainer{
+    max-width: 400px;
+    min-width: 300px;
+    min-height: 340px;
+  }
+  .bookrideContainer form{
+    padding: 20px;
+  }
+  .mapContainer{
+    width: 100%;
+  }
+}
