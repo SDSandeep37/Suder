@@ -1,0 +1,22 @@
+.statCard{
+  background-color: var(--dark-blue);
+  transition: var(--transition);
+}
+.statCard h3{
+  color: var(--bright-yellow);
+  font-weight: bold;
+}
+.statCard:hover{
+  background-color: var(--background);
+  border: 0.6px solid var(--foreground);
+}
+.activeRides ,.earnings{
+  background-color: var(--foreground);
+  color: var(--background);
+}
+.recentTrips{
+  background-color: var(--dark-blue);
+}
+.recentTrips th{
+  color: var(--bright-yellow);
+}

@@ -11,6 +11,7 @@ type DBUser = {
   last_name: string;
   mobile?: string;
   profile_pic: string;
+  isDriver?:boolean;
 };
 type UserContextType = {
   userData: DBUser | null;
@@ -40,6 +41,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
           });
           if (response.ok) {
             const userData = await response.json();
+            console.log(userData);
             // Set user data in context coming from the backend
             setUserData(userData);
           } else {
@@ -50,7 +52,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
               last_name: user.lastName || "",
               email: user.emailAddresses[0]?.emailAddress || "",
               mobile: user.phoneNumbers[0]?.phoneNumber || "",
-              profile_pic: user.imageUrl
+              profile_pic: user.imageUrl,
+              isDriver:false
             });
           }
         } catch (error) {         
@@ -61,7 +64,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
             last_name: user.lastName || "",
             email: user.emailAddresses[0]?.emailAddress || "",
             mobile: user.phoneNumbers[0]?.phoneNumber || "",
-            profile_pic: user.imageUrl
+            profile_pic: user.imageUrl,
+            isDriver:false
             });
           }
       }
