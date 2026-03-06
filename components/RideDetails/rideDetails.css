@@ -1,0 +1,19 @@
+
+.rideDetailsMainContianer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+.tableContainer table th{
+  background-color: var(--dark-blue);
+  color:var(--bright-yellow);
+}
+.tableContainer table td{
+  background-color: var(--foreground);
+  padding: 10px;
+  border: 1px solid var(--background);
+}
+.tableContainer button{
+  cursor: pointer;
+}

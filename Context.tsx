@@ -18,6 +18,7 @@ type UserContextType = {
   setUserData: React.Dispatch<React.SetStateAction<DBUser | null>>;
 };
 
+// Creating user context
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

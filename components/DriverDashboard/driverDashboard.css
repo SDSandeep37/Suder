@@ -20,3 +20,10 @@
 .recentTrips th{
   color: var(--bright-yellow);
 }
+.statCard button{
+  display: block;
+  background-color: var(--secondary);
+  margin: 0 auto;
+  border-radius: 2px;
+  cursor: pointer;
+}
