@@ -7,7 +7,6 @@ import Link from "next/link";
 
 const DriverDashboard = () => {
   const { userData } = useUserContext();
-  const [isOnline, setIsOnline] = useState(true);
   const [totalRides,setTotalRides] = useState(0);
   const [todayRides, setTodayRides] = useState(0);
   const [completedRides, setCompletedRides] = useState(0);
@@ -79,20 +78,11 @@ const DriverDashboard = () => {
     <div className="min-h-screen p-6">
       
       {/* Top Section */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">
+      {/* <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-center ">
           Welcome, {userData?.first_name}
         </h1>
-
-        {/* <button
-          onClick={() => setIsOnline(!isOnline)}
-          className={`px-4 py-2 rounded-lg text-white ${
-            isOnline ? "bg-green-500" : "bg-red-500"
-          }`}
-        >
-          {isOnline ? "Online" : "Offline"}
-        </button> */}
-      </div>
+      </div> */}
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">

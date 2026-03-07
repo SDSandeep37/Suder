@@ -39,11 +39,11 @@ const RidesDetails = () => {
     <div>
       {type === "availableRides" 
       &&
-        <RideDetails role="driver" user={Number(userData?.id)} type="available" details={availableRides}/>
+        <RideDetails user={Number(userData?.id)} type="available" details={availableRides}/>
       }
       {type === "myrides" 
       &&
-      <RideDetails role="driver" user={Number(userData?.id)} type="myrides" details={myRides}/>
+      <RideDetails user={Number(userData?.id)} type="myrides" details={myRides}/>
       }
     </div>
   )

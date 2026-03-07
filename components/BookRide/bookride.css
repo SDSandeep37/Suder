@@ -76,6 +76,7 @@
 small{
   font-size: 9px;
 }
+
 @media only screen and (max-width:1076px){
   .mainContainer{
     flex-direction: column;

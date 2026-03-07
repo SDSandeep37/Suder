@@ -42,7 +42,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
           });
           if (response.ok) {
             const userData = await response.json();
-            console.log(userData);
+           
             // Set user data in context coming from the backend
             setUserData(userData);
           } else {

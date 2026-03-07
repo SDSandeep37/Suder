@@ -17,7 +17,8 @@ interface RideDetailsPropes{
     fare:string
   }[]
 }
-const RideDetails = ({type,details,user} :RideDetailsPropes) => {
+
+const RideDetailsRider = ({type,details,user} :RideDetailsPropes) => {
   const [rides, setRides] = useState(details);
   const [loadingRideId, setLoadingRideId] = useState<number | null>(null);
   //loading the details on load of the page
@@ -65,12 +66,13 @@ const RideDetails = ({type,details,user} :RideDetailsPropes) => {
   };
   return (
     <div className="rideDetailsMainContianer">
-      <h1>{type==="available" ? "All Available Rides":"Your Rides Details"}</h1>
+      <h1>{type==="current" ? "Current rides details":
+      type==="all"?"All Rides Details":"Your Completed Rides Details"}</h1>
       <div className="overflow-x-auto tableContainer p-3">
       <table className="min-w-full borderdivide-y">
         <thead>
           <tr>
-            <th className="px-4 py-2 text-left text-sm font-semibold">Passange Name</th>
+            <th className="px-4 py-2 text-left text-sm font-semibold">Driver Name</th>
             <th className="px-4 py-2 text-left text-sm font-semibold">Email</th>
             <th className="px-4 py-2 text-left text-sm font-semibold">Mobile</th>
             <th className="px-4 py-2 text-left text-sm font-semibold">Pickup</th>
@@ -99,29 +101,14 @@ const RideDetails = ({type,details,user} :RideDetailsPropes) => {
                         detail.status === "ACCEPTED" ? "font-bold text-blue-500" :
                         detail.status === "STARTED" ? "font-bold text-yellow-700" :
                         detail.status === "CANCELLED"? "font-bold text-red-700":
-                        "font-bold text-green-600"}
+                        "font-bold text-green-600"
+                        }
                     `}>
                       {detail.status}
                     </span>
                   </td>
                   <td className="px-4 py-2 text-sm  text-gray-700">
-                    {detail.status==="REQUESTED" && (
-                      <button
-                        onClick={()=>handleRideStatus(detail.id,"accept")}
-                        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-                      >
-                        {loadingRideId === detail.id ? "Accepting..." : "Accept"}
-                      </button>
-                    )}
-                     {detail.status==="ACCEPTED" && (
-                        <button
-                        onClick={()=>handleRideStatus(detail.id,'start')}
-                        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-                        >
-                        {loadingRideId === detail.id ? "Starting..." : "Start"}
-                        </button>
-                      )}
-
+                    
                       {detail.status==="STARTED" && (
                         <button
                         onClick={()=>handleRideStatus(detail.id,"complete")}
@@ -157,4 +144,4 @@ const RideDetails = ({type,details,user} :RideDetailsPropes) => {
   )
 }
 
-export default RideDetails
+export default RideDetailsRider

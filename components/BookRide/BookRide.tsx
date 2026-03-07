@@ -1,9 +1,13 @@
-import { type SubmitEvent, useState } from "react";
+
+// Rider's Dashboard
+
+import { type SubmitEvent, useEffect, useState } from "react";
 import "./bookride.css";
 import dynamic from "next/dynamic";
 import { geocodeAddress } from "@/utils/geocodeAddress";
 import { reverseGeocode } from "@/utils/reverseGeocode";
 import { useUserContext } from "@/Context";
+import Link from "next/link";
 const RideMap = dynamic(
   () => import("../RideMap/RideMap").then((mod) => mod.RideMap),
   { ssr: false }
@@ -132,7 +136,47 @@ const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
 
  
 };
+
+  const [totalRides,setTotalRides] = useState(0);
+  const [todayRides, setTodayRides] = useState(0);
+  const [totalExpenses, setTotalExpenses] = useState(0);
+  const [activeRides,setActiveRides] = useState(0);
+  const [allRides,setAllRides] = useState(0);
+  const [completedRides,setCompletedRides] = useState(0);
+  const [currentRideCount, setCurrentRideCont] = useState(0);
+  const [inProgressRide, setinProgressRide] = useState(0);
+// getting the details for the dashboard
+  useEffect(() => {
+    const fetchRidesDetailsForDashboard = async () => {
+      if (!userData?.id) return;
+
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}rides/rider/${userData.id}/all`
+        );
+
+        const data = await res.json();
+        const otherRidesCount =  data.otherRidesCount;
+        setTotalRides(() =>otherRidesCount.total_rides?otherRidesCount.total_rides:0)
+        setTodayRides(()=> otherRidesCount.today_rides?otherRidesCount.today_rides:0);
+        setTotalExpenses(()=>otherRidesCount.today_expenses?otherRidesCount.today_expenses:0)
+        setActiveRides(()=>otherRidesCount.active_rides?otherRidesCount.active_rides:0)
+        setCompletedRides(()=>data.completed_rides?data.completed_rides:0)
+        setAllRides(()=>data.allRidesCount?data.allRidesCount:0)
+        setCurrentRideCont(()=>data.currentRidesCount?data.currentRidesCount:0)
+        setinProgressRide(()=>data.startedRidesCount?data.startedRidesCount:0)
+      } catch (error) {
+        console.error("Failed to fetch today's rides:", error);
+      }
+    };
+
+    fetchRidesDetailsForDashboard();
+  }, [userData]);
+
+
   return (
+    <>
+    
     <div className="mainContainer">
       <div className="bookrideContainer">
         <h1>Book Your Ride</h1>
@@ -169,8 +213,53 @@ const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
           pickupFromSearch={pickupCoords}
           dropoffFromSearch={dropoffCoords}/>
       </div>
+      
     </div>
+    <div className="userDashboardOptions mt-3">
+        <h1 className="text-center mt-2 mb-2 font-bold text-green-400 text-3xl">Your Dashboard</h1>
+        {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+        <StatCard view={true} type="all" title="All Rides" value={allRides.toString()} />
+        <StatCard view={true} type="current" title="Current Rides" value={currentRideCount.toString()}/>
+        <StatCard view={true} type="started" title="In progress rides" value={inProgressRide.toString()}/>
+        <StatCard view={false} type="" title="Total Rides" value={totalRides.toString()} />
+        <StatCard view={false} type="" title="Today's Rides" value={todayRides.toString()} />
+        <StatCard view={false} type="" title="Sucessfully Completed Rides" value={completedRides.toString()} />
+        
+        
+      </div>
+       {/* Main Content */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+
+        {/* Active Ride */}
+        <div className="activeRides p-6 rounded-xl shadow">
+          <h2 className="text-lg font-semibold mb-4">Active Ride</h2>
+          <p>{activeRides}</p>
+        </div>
+
+        {/* Expenses */}
+        <div className="earnings p-6 rounded-xl shadow">
+          <h2 className="text-lg font-semibold mb-4">Today's Expenses</h2>
+          <p className="text-2xl font-bold text-green-600">{totalExpenses .toString()}</p>
+        </div>
+      </div>
+    </div>
+    </>
   )
 }
+const StatCard = ({ title, value,view,type}: { title: string; value: string,view:boolean,type:string }) => {
+  return (
+    <div className="statCard p-6 rounded-xl shadow flex flex-col justify-center gap-1">
+      <h3 className="text-gray-500 text-sm">{title}</h3>
+      <p className="text-xl font-bold mt-2">{value}</p>
+      {view &&
+      <Link href={`/dashboard/rider_ride_details?type=${type}`}>
+        <button className="bg-blue-500 text-white px-3 py-1 roundeds">
+          View
+        </button>
+      </Link>}
+    </div>
+  );
+};
 
 export default BookRide
