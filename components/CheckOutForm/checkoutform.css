@@ -1,0 +1,7 @@
+.checkoutContainer{
+  background-color: var(--dark-blue);
+}
+.checkoutContainer button{
+  background-color: var(--secondary);
+  cursor: pointer;
+}

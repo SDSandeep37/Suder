@@ -224,7 +224,7 @@ const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
         <StatCard view={true} type="started" title="In progress rides" value={inProgressRide.toString()}/>
         <StatCard view={false} type="" title="Total Rides" value={totalRides.toString()} />
         <StatCard view={false} type="" title="Today's Rides" value={todayRides.toString()} />
-        <StatCard view={false} type="" title="Sucessfully Completed Rides" value={completedRides.toString()} />
+        {/* <StatCard view={false} type="" title="Sucessfully Completed Rides" value={completedRides.toString()} /> */}
         
         
       </div>

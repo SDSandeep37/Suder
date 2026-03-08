@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./rideDetails.css";
+import Link from "next/link";
 
 interface RideDetailsPropes{
   type:string,
@@ -21,9 +22,16 @@ interface RideDetailsPropes{
 const RideDetailsRider = ({type,details,user} :RideDetailsPropes) => {
   const [rides, setRides] = useState(details);
   const [loadingRideId, setLoadingRideId] = useState<number | null>(null);
+  const [paidRides, setPaidRides] = useState<number[]>([]);
+  const [receipts, setReceipts] = useState<{[key:number]:string}>({});
   //loading the details on load of the page
     useEffect(() => {
       setRides(details);
+       details.forEach((ride)=>{
+    if(ride.status === "COMPLETED"){
+      checkPayment(ride.id);
+    }
+  });
     }, [details]);
     // Handeling all status change poccess using this functio
   const handleRideStatus = async (rideId:number,route:string,) =>{
@@ -64,6 +72,32 @@ const RideDetailsRider = ({type,details,user} :RideDetailsPropes) => {
       setLoadingRideId(null); // stop loading
     }
   };
+   
+    const checkPayment = async (ride_id:number) => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}payments/${ride_id}/check`
+        );
+        if(res.ok){
+          const data = await res.json();
+          if(data.receipt_url){
+            setReceipts(prev => ({
+            ...prev,
+            [ride_id]: data.receipt_url
+            }));
+          }
+           setPaidRides(prev => [...prev, ride_id]);
+        }
+       
+        
+      } catch (error) {
+        console.error("Failed to fetch today's rides:", error);
+      }
+    };
+
+   
+
+
   return (
     <div className="rideDetailsMainContianer">
       <h1>{type==="current" ? "Current rides details":
@@ -126,6 +160,24 @@ const RideDetailsRider = ({type,details,user} :RideDetailsPropes) => {
                         {loadingRideId === detail.id ? "Cancelling..." : "Cancel"}
                       </button>
                     )}
+                    {detail.status==="COMPLETED" && !paidRides.includes(detail.id) &&(
+                      <Link href={`/dashboard/payments?id=${detail.id}&amount=${detail.fare}&user=${user}`}>
+                        <button
+                        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                        >
+                          Pay Now
+                        </button>
+                        </Link>
+                      )}
+                    {detail.status==="COMPLETED" && paidRides.includes(detail.id) && receipts[detail.id] &&(
+                      <a href={receipts[detail.id]} target="_blank">
+                        <button
+                        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                        >
+                          Receipt
+                        </button>
+                        </a>
+                      )}
                   </td>
                 </tr>
               )

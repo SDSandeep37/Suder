@@ -2,7 +2,7 @@
 import BookRide from '@/components/BookRide/BookRide';
 import { useUserContext } from '@/Context';
 import DriverDashoard from '@/components/DriverDashboard/DriverDashoard';
-import { useEffect, useState } from 'react';
+
 
 const Dashboard = () => {
   const { userData } = useUserContext();
